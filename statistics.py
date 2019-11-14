@@ -38,112 +38,6 @@ df = pd.DataFrame(data, columns=['Date', 'Team1', 'Team2', 'Score1', 'Score2'])
 
 ########################################################################################################
 
-def wskaznik_h(index):
-    rw = int(df['Score1'][index]) - int(df['Score2'][index])  # rw /diff-roznica
-
-    d0=0.333
-
-    w1 = 1
-    w2 = w1 * 1.31
-    w3 = w2 * 1.21
-    w4 = w3 * 1.21
-    w5 = w4 * 1.21
-    w6 = w5 * 1.11
-    w7 = w6 * 1.11
-    w8 = w7 * 1.11
-    w9 = w8 * 1.11
-    w10 = w9 * 1.11
-    w11 = w10*1.11
-
-    l1 = 0.133
-    l2 = l1 / 1.61
-    l3 = l2 / 1.51
-    l4 = l3 / 1.51
-    l5 = l4 / 1.51
-    l6 = l5 / 1.51
-    l7 = l6 / 1.41
-    l8 = l7 / 1.31
-    l9 = l8 / 1.21
-    l10 = l9 / 1.11
-    l11 = l10 / 1.11
-
-    if rw == 0: wsk = d0
-    elif rw == 1:   wsk = w1
-    elif rw == -1:  wsk = l1
-    elif rw == 2:   wsk = w2
-    elif rw == -2:  wsk = l2
-    elif rw == 3:   wsk = w3
-    elif rw == -3:  wsk = l3
-    elif rw == 4:   wsk = w4
-    elif rw == -4:  wsk = l4
-    elif rw == 5:    wsk = w5
-    elif rw == -5:  wsk = l5
-    elif rw == 6:   wsk = w6
-    elif rw == -6:   wsk = l6
-    elif rw == 7:   wsk = w7
-    elif rw == -7:  wsk = l7
-    elif rw == 8:   wsk = w8
-    elif rw == -8:  wsk = l8
-    elif rw == 9:   wsk = w9
-    elif rw == -9:  wsk = l9
-    elif rw == 10:   wsk = w10
-    elif rw == -10:  wsk = l10
-    elif rw >=11:   wsk = w11
-    elif rw <= -11:  wsk = l11
-    return wsk
-def wskaznik_a(index):
-    rw = int(df['Score2'][index]) - int(df['Score1'][index])  # rw /diff-roznica
-
-    d0=0.333
-
-    w1 = 1
-    w2 = w1 * 1.31
-    w3 = w2 * 1.21
-    w4 = w3 * 1.21
-    w5 = w4 * 1.21
-    w6 = w5 * 1.11
-    w7 = w6 * 1.11
-    w8 = w7 * 1.11
-    w9 = w8 * 1.11
-    w10 = w9 * 1.11
-    w11 = w10*1.11
-
-    l1 = 0.133
-    l2 = l1 / 1.61
-    l3 = l2 / 1.51
-    l4 = l3 / 1.51
-    l5 = l4 / 1.51
-    l6 = l5 / 1.51
-    l7 = l6 / 1.41
-    l8 = l7 / 1.31
-    l9 = l8 / 1.21
-    l10 = l9 / 1.11
-    l11 = l10 / 1.11
-
-    if rw == 0: wsk = d0
-    elif rw == 1:   wsk = w1
-    elif rw == -1:  wsk = l1
-    elif rw == 2:   wsk = w2
-    elif rw == -2:  wsk = l2
-    elif rw == 3:   wsk = w3
-    elif rw == -3:  wsk = l3
-    elif rw == 4:   wsk = w4
-    elif rw == -4:  wsk = l4
-    elif rw == 5:    wsk = w5
-    elif rw == -5:  wsk = l5
-    elif rw == 6:   wsk = w6
-    elif rw == -6:   wsk = l6
-    elif rw == 7:   wsk = w7
-    elif rw == -7:  wsk = l7
-    elif rw == 8:   wsk = w8
-    elif rw == -8:  wsk = l8
-    elif rw == 9:   wsk = w9
-    elif rw == -9:  wsk = l9
-    elif rw == 10:   wsk = w10
-    elif rw == -10:  wsk = l10
-    elif rw >=11:   wsk = w11
-    elif rw <= -11:  wsk = l11
-    return wsk
 def punkty_h(index):
     rw = int(df['Score1'][index]) - int(df['Score2'][index])  # rw /diff-roznica
     if rw == 0: pkt = 1
@@ -402,13 +296,11 @@ for team_groups in groups:
             bts_b=int(bts_h(index))
             team1=int(df['Score1'][index])
             team2=int(df['Score2'][index])
-            wskaznik=wskaznik_h(index)
             punkty=punkty_h(index)
         elif df['Team2'][index]==team_groups:
             bts_b=int(bts_a(index))
             team2=int(df['Score1'][index])
             team1=int(df['Score2'][index])
-            wskaznik = wskaznik_a(index)
             punkty=punkty_a(index)
         # points
         temp_pkt_b.append(punkty)
@@ -470,13 +362,11 @@ for team_groups in groups:
             bts_b_l5 = int(bts_h(index))
             team1 = int(df['Score1'][index])
             team2 = int(df['Score2'][index])
-            wskaznik = wskaznik_h(index)
             punkty = punkty_h(index)
         elif df['Team2'][index] == team_groups:
             bts_b_l5 = int(bts_a(index))
             team2 = int(df['Score1'][index])
             team1 = int(df['Score2'][index])
-            wskaznik = wskaznik_a(index)
             punkty = punkty_a(index)
         temp_pkt_b_l5.append(punkty)
         # goals
@@ -514,6 +404,14 @@ for team_groups in groups:
                 round((int(sum(temp_bts_b_l5))/5)* 100, 2), s_bts_max, s_nbts_max, bts_current]})
 
 
+ex=(["pkt", "goal_s", "goal_c", "bts", "p_bts", "s_bts", "s_nbts", "l_bts", "_b", "_h", "_a"],["number of points", "goals scored", "goals conceded", "'both team to score'",
+    "% of 'both team to score'", "maximum series of 'both team to score'", "maximum series of 'not both team to score'", "current 'both team to score' series",
+    "statistics for home+away", "statistics for home", "statistics for away"])
+exx=pd.DataFrame(ex, index=["shortcut", "explanation"]).T
+print(exx, "\n")
+
+
+
 headers=["pkt", "goal_s", "goal_c", "bts", "p_bts", "s_bts", "s_nbts", "l_bts"]
 df_dic_both=pd.DataFrame(dic_both, index=headers).T
 df_dic_home=pd.DataFrame(dic_home, index=headers).T
@@ -522,29 +420,28 @@ df_dic_both_l5=pd.DataFrame(dic_both_l5, index=headers).T
 df_dic_home_l5=pd.DataFrame(dic_home_l5, index=headers).T
 df_dic_away_l5=pd.DataFrame(dic_away_l5, index=headers).T
 
-print("both", df_dic_both, "\n")
-print("home", df_dic_home, "\n")
-print("away", df_dic_away, "\n")
-print("both_l5", df_dic_both_l5, "\n")
-print("home_l5", df_dic_home_l5, "\n")
-print("away_l5", df_dic_away_l5, "\n")
+print("table: home+away", "\n", df_dic_both, "\n")
+print("table: home", "\n", df_dic_home, "\n")
+print("table: away", "\n", df_dic_away, "\n")
+print("table: home+away_l5", "\n", df_dic_both_l5, "\n")
+print("table: home_l5", "\n", df_dic_home_l5, "\n")
+print("table: away_l5", "\n", df_dic_away_l5, "\n")
 
 
-print("tabelka:")
 table={}
 table_bts={}
 for x in groups:
     table.update({x: [df_dic_both.loc[x]["pkt"], str(df_dic_both.loc[x]["goal_s"])+":"+str(df_dic_both.loc[x]["goal_c"]), df_dic_home.loc[x]["pkt"], str(df_dic_home.loc[x]["goal_s"])+":"+str(df_dic_home.loc[x]["goal_c"]),
           df_dic_away.loc[x]["pkt"],str(df_dic_away.loc[x]["goal_s"])+":"+str(df_dic_away.loc[x]["goal_c"])]})
 df=pd.DataFrame(table, index=["pkt_b", "goals_b", "pkt_h", "goals_h","pkt_a", "goals_a"]).T
-print("tabela")
+print("table: point & goals")
 print(df, "\n")
 
 for x in groups:
     table_bts.update({x: [str(df_dic_both.loc[x]["bts"]), str(round(df_dic_both.loc[x]["p_bts"], 3)), str(df_dic_home.loc[x]["bts"]),
             str(round(df_dic_home.loc[x]["p_bts"], 3)), str(df_dic_away.loc[x]["bts"]), str(round(df_dic_away.loc[x]["p_bts"], 3))]})
 df=pd.DataFrame(table_bts, index=["bts_b", "p_bts_b","bts_h", "p_bts_h","bts_a", "p_bts_a"]).T
-print("tabela bts")
+print("table: both team to score")
 print(df)
 
 
